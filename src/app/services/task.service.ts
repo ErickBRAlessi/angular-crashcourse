@@ -17,8 +17,20 @@ export class TaskService {
     return this.http.get<Task[]>(this.apiUrl)
   }
 
-  
-  
+  deleteTask(task: Task): Observable<Task> {
+    const url = `${this.apiUrl}/${task.id}`;
+    return this.http.delete<Task>(url);
+  }
+
+  updateTaskReminder(task: Task): Observable<Task> {
+    const url = `${this.apiUrl}/${task.id}`;
+    return this.http.put<Task>(url, task);
+  }
+
+  createTask(task: Task): Observable<Task> {
+    return this.http.post<Task>(this.apiUrl, task);
+  }
+
   /* --not observable solution --
   getTasks(): Observable<Task[]> {
     return of(TASKS);
